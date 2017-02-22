@@ -1,0 +1,25 @@
+{
+  "name": "neko",
+  "version": "0.0.0",
+  "description": "neKo is an innovative chat created by two students from France. It has been designed to offer several brand new user-friendly features.",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shenrak/neKo.git"
+  },
+  "author": "Giom, Veuch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shenrak/neKo/issues"
+  },
+  "homepage": "https://github.com/Shenrak/neKo#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
+  }
+}
