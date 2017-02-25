@@ -10,7 +10,7 @@ var request = request('http://localhost:8085');
 
 describe('Tests backend API', function(){
   describe('Testing server responses', function(){
-    it('Should return 200 when GET on /', function(done){
+    it('Should return 200 when GET on /test', function(done){
       request
         .get('/test')
         .expect(200)
