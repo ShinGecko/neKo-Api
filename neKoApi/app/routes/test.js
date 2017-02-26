@@ -1,6 +1,8 @@
-var router = require('koa-router')();
+var router = require('koa-router')({
+  prefix:'/test'
+});
 
-router.get('/test', function*(next){
+router.get('/', function*(next){
   this.response.status = 200
   yield next;
 });

@@ -3,7 +3,7 @@ var _ = require('lodash');
 var routes = [];
 
 var files = [
-  'test' //, 'chat', 'user'
+  'test' //, 'chat', 'users'
 ];
 
 for (var i=0 ; i < files.length ; i++){

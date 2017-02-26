@@ -1,4 +1,6 @@
-var router = require('koa-router')();
+var router = require('koa-router')({
+  prefix:'/users'
+});
 
 router.get('/', function* (){this.response.status = 200}); // Define routes
 
