@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development nodemon server.js",
     "test": "find ./test -name 'index.js' | xargs mocha -R spec",
-    "testwin" : "find ./test -name 'index.js' | mocha -R spec"
+    "testwin": "find ./test -name 'index.js' | mocha -R spec"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,6 @@
     "koa": "^1.2.5",
     "koa-router": "^5.4.0",
     "lodash": "^4.17.4",
-    "rethinkdb": "^2.3.3"
+    "thinky": "^2.3.8"
   }
 }
