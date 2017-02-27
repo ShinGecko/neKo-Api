@@ -1,7 +1,8 @@
-var _ = require('lodash');
+var models = require('./../models');
+var User = models.Users;
 
-module.exports.auth = function (req, res, next) {
-  User.findOne({ login: req.body.login, password: req.body.password }, function(err, model) {
+module.exports.auth = async function (ctx, next) {
+  Users.findOne({ login: this.login, password: this.password }, function(err, model) {
     if (err) throw err
     if(model) {
       res.send(model._id);
