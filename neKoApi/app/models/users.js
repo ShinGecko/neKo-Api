@@ -1,8 +1,8 @@
-var thinky = require('thinky')();
-var type = thinky.type;
-var r = thinky.r;
+const thinky = require('thinky')();
+const type = thinky.type;
+const r = thinky.r;
 
-var Users = thinky.createModel("User", {
+const Users = thinky.createModel("User", {
   id: type.String(),
   login: {_type: type.String(), enforce_type: "strict"},
   password: {_type: type.String(), enforce_type: "strict"},

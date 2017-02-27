@@ -1,10 +1,10 @@
-var router = require('koa-router')({
+const router = require('koa-router')({
   prefix:'/test'
 });
 
-router.get('/', function*(next){
-  this.response.status = 200
-  yield next;
+router.get('/', async function (ctx, next) {
+  ctx.response.status = 200
+  await next;
 });
 
 module.exports = router;

@@ -1,5 +1,5 @@
-var models = require('./../models');
-var User = models.Users;
+let models = require('./../models');
+let User = models.Users;
 
 module.exports.auth = async function (ctx, next) {
   Users.findOne({ login: this.login, password: this.password }, function(err, model) {
