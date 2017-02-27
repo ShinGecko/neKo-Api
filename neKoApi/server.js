@@ -1,21 +1,20 @@
-var koa = require('koa');
-var app = koa();
-var _ = require('lodash');
+const Koa = require('koa');
+const app = new Koa();
 
-var routes = require('./app/routes');
+const routes = require('./app/routes');
 
 app.use(allowCrossDomain);
-_.forEach(routes, function(route){
-  app.use(route.routes());
-});
 
-function *allowCrossDomain (next){
-    this.set('Access-Control-Allow-Origin', '*');
-    this.set('Content-Type', 'text/html; charset=utf-8');
-    this.set('Access-Control-Allow-Credentials', true);
-    this.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    this.set('Access-Control-Allow-Headers', 'Content-Type,Authorization,Origin');
-    yield next;
+for (const route of routes)
+  app.use(route.routes());
+
+async function allowCrossDomain (ctx, next) {
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Content-Type', 'text/html; charset=utf-8');
+    ctx.set('Access-Control-Allow-Credentials', true);
+    ctx.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    ctx.set('Access-Control-Allow-Headers', 'Content-Type,Authorization,Origin');
+    await next;
 }
 
 app.listen(process.env.PORT || 8085, function(){
