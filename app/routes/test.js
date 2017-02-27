@@ -8,4 +8,7 @@ router.get('/', async function (ctx, next) {
   await next;
 });
 
-module.exports = router;
+module.exports = {
+  routes: router.routes(),
+  methods: router.allowedMethods()
+};

@@ -5,8 +5,11 @@ const routes = require('./app/routes');
 
 app.use(allowCrossDomain);
 
-for (const route of routes)
-  app.use(route.routes());
+for (const route of routes.routes)
+  app.use(route);
+
+for (const method of routes.methods)
+  app.use(method);
 
 async function allowCrossDomain (ctx, next) {
     ctx.set('Access-Control-Allow-Origin', '*');
