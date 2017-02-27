@@ -1,28 +1,30 @@
+const server = require('../server.js');
+const chai = require('chai');
+
 // launching the server
 process.env.NODE_ENV = 'test';
-var server = require('../server.js');
+
 
 // packages used to run tests
-var chai = require('chai');
-var expect = chai.expect;
-var request = require('supertest');
-var request = request('http://localhost:8085');
+const expect = chai.expect;
+const request = require('supertest');
+const request = request('http://localhost:8085');
 
-// var needed to run tests
+// const needed to run tests
 // Login infos
-var correctLogin = "test";
-var correctEmail = "test@test.test";
-var correctPassword = "test123";
-var wrongLogin = "t";
-var wrongEmail = "test";
-var wrongPassword = "test1";
+const correctLogin = "test";
+const correctEmail = "test@test.test";
+const correctPassword = "test123";
+const wrongLogin = "t";
+const wrongEmail = "test";
+const wrongPassword = "test1";
 // Paths
-var testPath = '/test';
-var signUpPath = '/user';
-var signInPath = '/user/auth';
+const testPath = '/test';
+const signUpPath = '/user';
+const signInPath = '/user/auth';
 // Types
-var typeJson = 'json';
-var typeText = 'text/plain';
+const typeJson = 'json';
+const typeText = 'text/plain';
 
 describe('Tests backend API', function(){
   describe('Testing server responses', function(){

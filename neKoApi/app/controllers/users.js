@@ -1,5 +1,4 @@
-var _ = require('lodash');
-
+//TODO: isn't it express stuff?
 module.exports.auth = function (req, res, next) {
   User.findOne({ login: req.body.login, password: req.body.password }, function(err, model) {
     if (err) throw err
