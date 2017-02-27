@@ -18,6 +18,6 @@ function *allowCrossDomain (next){
     yield next;
 }
 
-app.listen(8085, function(){
+app.listen(process.env.PORT || 8085, function(){
   console.log("Server listening on port 8085");
 });

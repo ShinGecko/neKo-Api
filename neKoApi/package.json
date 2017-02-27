@@ -4,7 +4,8 @@
   "description": "neKo is an innovative chat created by two students from France. It has been designed to offer several brand new user-friendly features.",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon server.js",
+    "start": "node server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
     "test": "find ./test -name 'index.js' | xargs mocha -R spec",
     "testwin": "find ./test -name 'index.js' | mocha -R spec"
   },
