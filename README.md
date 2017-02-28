@@ -33,3 +33,5 @@ adjustments. Each time you'll try to push, it will check the coding style. To re
 But to get proper linting information inside your text editor, you can use on of the following [plugins](https://github.com/sindresorhus/xo#editor-plugins)
 
 > Side note: if you're using vim (like me), juste use [ale](https://github.com/w0rp/ale), it's way better than syntastic.
+
+You can also install [editorconfig](http://editorconfig.org) to allow your editor of choice respect the coding style (on some particuliar aspects).
