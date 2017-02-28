@@ -2,11 +2,11 @@ const files = [
   'test',
   //'chat',
   //'users',
-];
+]
 
-routes = files
+const routes = files
     .map(file => `${__dirname}/${file}`)
-    .map(require);
+    .map(require)
 
 module.exports = {
   routes: routes.map(route => route.routes),

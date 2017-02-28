@@ -1,19 +1,23 @@
-const thinky = require('thinky')();
-const type = thinky.type;
-const r = thinky.r;
+const thinkyMod = require('thinky')
 
-const Users = thinky.createModel("User", {
+const thinky = thinkyMod()
+const type = thinky.type
+const r = thinky.r
+
+/* eslint-disable camelcase */
+const Users = thinky.createModel('User', {
   id: type.String(),
-  login: {_type: type.String(), enforce_type: "strict"},
-  password: {_type: type.String(), enforce_type: "strict"},
-  email: {_type: type.String().email(), enforce_type: "strict"},
-  age: type.number().default({
-    if(this.birthDate){
-      return this.birthDate.prototype.getFullYear() - r.now().prototype.getFullYear();
+  login: { _type: type.String(), enforce_type: 'strict' },
+  password: { _type: type.String(), enforce_type: 'strict' },
+  email: { _type: type.String().email(), enforce_type: 'strict' },
+  age: type.number().default(function () {
+    if (this.birthDate) {
+      return this.birthDate.prototype.getFullYear() - r.now().prototype.getFullYear()
     }
-    return null;
+    return null
   }),
   birthDate: Date,
-});
+})
+/* eslint-enable camelcase */
 
-module.exports = Users;
+module.exports = Users

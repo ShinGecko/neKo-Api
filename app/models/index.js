@@ -1,11 +1,11 @@
-var models = {};
+const models = {}
 
-var files = [
+const files = [
   'users'
-];
+]
 
-for(let i in files) {
-  models[files[i]] = require('./' + files[i]);
+for (const i of files) {
+  models[files[i]] = require('./' + files[i]) // eslint-disable-line import/no-dynamic-require
 }
-console.log(models);
-module.exports = models;
+console.log(models)
+module.exports = models

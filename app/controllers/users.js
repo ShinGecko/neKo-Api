@@ -1,20 +1,19 @@
-let models = require('./../models');
-let User = models.Users;
+const models = require('./../models')
 
-module.exports.auth = async function (ctx, next) {
-  Users.findOne({ login: this.login, password: this.password }, function(err, model) {
-    if (err) throw err
-    if(model) {
-      res.send(model._id);
-      Auth.userService.isConnected = true;
-      res.end();
+const Users = models.Users
+
+module.exports.auth = async function (ctx) {
+  Users.findOne({ login: this.login, password: this.password }, function (err, model) {
+    if (err) {
+      throw err
     }
-    else {
-      res.writeHead(401,{
-        'Content-Type': 'text/plain'
-      });
-      res.write("Wrong Login or Password");
-      res.end();
+    if (model) {
+      ctx.body = model._id
+      // Auth.userService.isConnected = true
+    } else {
+      ctx.set('Content-Type', 'text/plain')
+      ctx.status = 401
+      ctx.body = 'Wrong Login or Password'
     }
-  });
+  })
 }
