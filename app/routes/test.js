@@ -6,7 +6,7 @@ const router = new Router({
 
 router.get('/', async function (ctx, next) {
   ctx.response.status = 200
-  await next
+  await next()
 })
 
 module.exports = {
