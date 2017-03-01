@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "NODE_ENV=development nodemon server.js",
+    "dev": "NODE_ENV=development nodemon -V server.js",
     "test": "xo && mocha",
     "prepush":" npm run lint --silent",
     "lint": "xo"
@@ -37,6 +37,7 @@
     "semicolon": false,
     "space": true,
     "rules": {
+      "no-var": "error",
       "object-curly-spacing": [
         "error",
         "always"
