@@ -1,7 +1,7 @@
 # neKo [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
 [neKo](https://github.com/Shenrak/neKo) is an innovative chat created by two students from France.
-It has been designed to offer several brand new user-friendly features.
+It has been designed to offer several brand new user-friendly features.  
 This is the neKo's API repository. You can lso check the [Front-End](https://github.com/ShinGecko/neKo) repo.
 
 ## Installing
