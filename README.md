@@ -2,6 +2,7 @@
 
 [neKo](https://github.com/Shenrak/neKo) is an innovative chat created by two students from France.
 It has been designed to offer several brand new user-friendly features.
+This is the neKo's API repository. You can lso check the [Front-End](https://github.com/ShinGecko/neKo) repo.
 
 ## Installing
  
