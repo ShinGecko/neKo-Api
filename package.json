@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "NODE_ENV=development nodemon -V server.js",
     "test": "xo && mocha",
-    "prepush":" npm run lint --silent",
+    "prepush": " npm run lint --silent",
     "lint": "xo"
   },
   "repository": {
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "koa": "^2.0.1",
+    "koa-bodyparser": "^4.1.0",
     "koa-router": "^7.1.0",
     "thinky": "^2.3.8"
   },
