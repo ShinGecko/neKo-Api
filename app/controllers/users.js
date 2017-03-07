@@ -6,8 +6,7 @@ const Users = models[0]
 module.exports.auth = async function (ctx) {
   if (Users.authenticateUser(this.email, this.password)) {
     ctx.response.status = 200
-  }
-  else {
+  } else {
     ctx.set('Content-Type', 'text/plain')
     ctx.response.status = 401
     ctx.body = 'Wrong Login or Password'
@@ -22,16 +21,16 @@ module.exports.create = async function (ctx) {
     ctx.set('Content-Type', 'text/plain')
     ctx.response.status = 401
     ctx.body = 'Infos sent didn\'t match requirements'
-  }
-  else {
+  } else {
     Users.save({
       login: ctx.request.body.login,
       password: ctx.request.body.password,
       email: ctx.request.body.email,
-    }).then(function (result) {
+    }).then(function () {
       ctx.response.status = 201
-    }).error(function (error) {
-
     })
+    // }).error(function (error) {
+
+    // })
   }
 }
