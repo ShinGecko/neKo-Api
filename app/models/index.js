@@ -1,11 +1,7 @@
-const files = [
-  'users',
-  //'chat',
-  //'users',
-]
-
-const models = files
-    .map(file => `${__dirname}/${file}`)
-    .map(require)
+const models = {
+  users: require('./users'),
+  // messages: require('./messages'),
+  // groups: require('./groups'),
+}
 
 module.exports = models

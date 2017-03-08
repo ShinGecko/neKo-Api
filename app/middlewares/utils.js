@@ -11,25 +11,25 @@ function responseTime() {
 function catchErrors(opts) {
   const { toJson, includeStack } = Object.assign({ toJson: false, includeStack: false }, opts)
   return (ctx, next) =>
-    next().catch(err => {
-      let res
-      if (toJson) {
-        res = {
-          message: err.message,
-        }
-        if (includeStack) {
-          res.stack = err.stack
-        }
-      } else {
-        res = `<h4>Oops! Something went wrong...</h4>
-          <p>Here, the message:<br><code>${err.message}</code></p>`
-        if (includeStack) {
-          res += `<p>And this is the stack:<br><code>${err.stack}</code></p>`
-        }
+  next().catch(err => {
+    let res
+    if (toJson) {
+      res = {
+        message: err.message,
       }
-      ctx.status = err.status || 505
-      ctx.body = res
-    })
+      if (includeStack) {
+        res.stack = err.stack
+      }
+    } else {
+      res = `<h4>Oops! Something went wrong...</h4>
+      <p>Here, the message:<br><code>${err.message}</code></p>`
+      if (includeStack) {
+        res += `<p>And this is the stack:<br><code>${err.stack}</code></p>`
+      }
+    }
+    ctx.status = err.status || 505
+    ctx.body = res
+  })
 }
 
 function endOfStack(opts) {
@@ -44,8 +44,20 @@ function endOfStack(opts) {
   }
 }
 
+function allowCrossDomain() {
+  return function (ctx, next) {
+    ctx.set('Access-Control-Allow-Origin', '*')
+    ctx.set('Content-Type', 'text/html; charset=utf-8')
+    ctx.set('Access-Control-Allow-Credentials', true)
+    ctx.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    ctx.set('Access-Control-Allow-Headers', 'Content-Type,Authorization,Origin')
+    next()
+  }
+}
+
 module.exports = {
   responseTime,
   catchErrors,
   endOfStack,
+  allowCrossDomain,
 }

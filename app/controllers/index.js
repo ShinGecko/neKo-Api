@@ -1,11 +1,7 @@
-const files = [
-  'users',
-  //'chat',
-  //'users',
-]
+const controllers = {
+  users: require('./users'),
+  // messages: require('./messages'),
+  // groups: require('./groups'),
+}
 
-const Controllers = files
-    .map(file => `${__dirname}/${file}`)
-    .map(require)
-
-module.exports = Controllers
+module.exports = controllers
