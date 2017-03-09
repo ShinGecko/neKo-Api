@@ -32,6 +32,7 @@
     "koa": "^2.0.1",
     "koa-bodyparser": "^4.1.0",
     "koa-router": "^7.1.0",
+    "koa2-cors": "^2.0.3",
     "thinky": "^2.3.8"
   },
   "xo": {

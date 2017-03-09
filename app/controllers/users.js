@@ -12,6 +12,7 @@ module.exports.auth = async function (ctx) {
     ctx.status = 401
     ctx.body = 'Wrong Login or Password'
   }
+  console.log('controller')
   return true
 }
 

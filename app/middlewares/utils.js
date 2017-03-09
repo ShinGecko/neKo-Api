@@ -44,20 +44,8 @@ function endOfStack(opts) {
   }
 }
 
-function allowCrossDomain() {
-  return function (ctx, next) {
-    ctx.set('Access-Control-Allow-Origin', '*')
-    ctx.set('Content-Type', 'text/html; charset=utf-8')
-    ctx.set('Access-Control-Allow-Credentials', true)
-    ctx.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    ctx.set('Access-Control-Allow-Headers', 'Content-Type,Authorization,Origin')
-    next()
-  }
-}
-
 module.exports = {
   responseTime,
   catchErrors,
   endOfStack,
-  allowCrossDomain,
 }
