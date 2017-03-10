@@ -59,24 +59,19 @@ function colorize(str, colorName) {
   }
   return `\u001b[${colorCodes[colorName]}m${str}\u001b[${clearColorCode}m`
 }
-/*
- * Logger takes in input an object containing all the settings for the logger: what to log,
+
+/**
+ * The logger will log when a request comes in, and when a request comes out. It will log
+ * different informations, and colored.
+ * The function takes in input an object containing all the settings for the logger: what to log,
  * with which colors...
- *
- * You can log 6 informations: method, path, origin, responseTime, contentLength, and status.
- *
- * The object contain three objects: _logs_, _colors_, and _separators_.
- * - logs:
- *   Contains two arrays of strings: _logs.in_ and _logs.out_.
- *   _logs.in_ is the list of informations to log when request arrives, and _logs.out_
- *   is the list of informations to log when the response leaves.
- * - colors:
- *   a map of color names for each information. Go see colorCodes for more info on the
- *   color names. If a key has a null value, or the color name is not recognized, then
- *   no color is applicated.
- * - separators:
- *   The characters to print when a request arrives (_separators.in_) and when a request
- *   leaves (_separators.out_). Default to '<--' and '-->'
+ * @param {Object} [opts] Contains all options.
+ * @param {String[]} opts.logs.in Informations to log when a request comes in.
+ * @param {String[]} opts.logs.out Informations to log when a response comes out.
+ * @param {Object} opts.colors Link a color to an information. If the name is not known, no color is applied.
+ * @param {String} opts.separators.in String to print when a request comes in.
+ * @param {String} opts.separators.out String to print when a response comes out.
+ * @returns {Function} Koa2 middleware
  */
 function logger(opts) {
   // default options
