@@ -2,7 +2,7 @@
 const thinky = require('thinky')
 
 const config = Object.assign({
-  db: 'neko-api'
+  db: 'neko'
 }, getCustomConfig())
 
 const thinkyInstance = thinky(config)
@@ -13,7 +13,7 @@ function getCustomConfig() {
   try {
     return require('../../config.js') // eslint-disable-line import/no-unresolved
   } catch (err) {
-    console.log('WARINING: using defaults for database connection')
+    console.log('WARNING: using defaults for database connection')
     return {}
   }
 }
