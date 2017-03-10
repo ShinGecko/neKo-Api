@@ -1,19 +1,9 @@
 // file: utils/thinky.js
 const thinky = require('thinky')
+const config = require('./config')
 
-const config = Object.assign({
-  db: 'neko'
-}, getCustomConfig())
+const dbConfig = config.get('database')
 
-const thinkyInstance = thinky(config)
+const thinkyInstance = thinky(dbConfig)
 
 module.exports = thinkyInstance
-
-function getCustomConfig() {
-  try {
-    return require('../../config.js') // eslint-disable-line import/no-unresolved
-  } catch (err) {
-    console.log('WARNING: using defaults for database connection')
-    return {}
-  }
-}
