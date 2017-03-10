@@ -3,6 +3,7 @@ const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 const routes = require('./app/routes')
 const { utils, logger } = require('./app/middlewares')
+const config = require('./app/utils/config')
 
 const app = new Koa()
 
@@ -35,6 +36,9 @@ for (const method of routes.methods) {
 
 app.use(utils.endOfStack())
 
-module.exports = app.listen(process.env.PORT || 8085, function () {
+const port = process.env.PORT || config.get('global.port')
+config.set('global.port', port)
+
+module.exports = app.listen(port, function () {
   console.log('Server listening on port 8085')
 })
