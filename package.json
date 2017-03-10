@@ -50,7 +50,8 @@
       "comma-dangle": [
         "error",
         "only-multiline"
-      ]
+      ],
+      "no-negated-condition": "off"
     }
   }
 }
