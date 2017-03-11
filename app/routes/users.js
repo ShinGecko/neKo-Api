@@ -10,11 +10,9 @@ router.get('/', async function (ctx) {
 })
 
 router.post('/create', async function (ctx, next) {
-  console.log('precontroller')
   if (!await controllers.users.create(ctx)) {
     await next()
   }
-  console.log('postcontroller')
 })
 
 router.post('/auth', async function (ctx, next) {

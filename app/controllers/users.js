@@ -4,15 +4,21 @@ const logEx = new RegExp('^[a-zA-Z]{3,12}$')
 const emailEx = new RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$')
 const passEx = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z]).{7,20}$')
 
+const auth = (email, password) =>
+models.users.filter({
+  email: email,
+  password: password,
+}).run()
+
 module.exports.auth = async function (ctx) {
-  if (models.users.authenticateUser(this.email, this.password)) {
+  const user = await auth(ctx.request.body.email, ctx.request.body.password)
+  if (user[0]) {
     ctx.status = 200
   } else {
     ctx.set('Content-Type', 'text/plain')
     ctx.status = 401
     ctx.body = 'Wrong Login or Password'
   }
-  console.log('controller')
   return true
 }
 

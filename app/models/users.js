@@ -20,12 +20,12 @@ Users.post('save', function (next) {
   next()
 })
 
-Users.define('authenticateUser', function (email, password) {
-  if (password === this.password && email === this.email) {
-    return true
-  }
-  return false
-})
+// Users.define('authenticateUser', function (email, password) {
+//  if (password === this.password && email === this.email) {
+//    return true
+//  }
+// return false
+// })
 /* eslint-enable camelcase */
 
 module.exports = Users
