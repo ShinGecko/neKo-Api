@@ -5,7 +5,12 @@
  */
 const config = {
   database: {
-    db: 'neko_api'
+    default: {
+      db: 'neko_api'
+    },
+    tests: {
+      db: 'neko_tests'
+    }
   },
   general: {
     port: 8085
@@ -26,9 +31,12 @@ module.exports = {
  * @param {Object} value - value of the subconfig
  */
 function partialOverride(path, value) {
+  if (path === '.') {
+    throw new Error('config: cannot override full config')
+  }
   const paths = path.split('.')
   const lastPath = paths.pop()
-  const subconfig = paths.reduce((current, subPath) => current[subPath])
+  const subconfig = paths.reduce((current, subPath) => current[subPath], config)
   subconfig[lastPath] = value
 }
 
@@ -38,9 +46,12 @@ function partialOverride(path, value) {
  * @returns {Object} - the subconfig
  */
 function partialGet(path) {
+  if (path === '.') {
+    return deepClone(config)
+  }
   const paths = path.split('.')
-  const subconfig = paths.reduce((current, subPath) => current[subPath])
-  return Object.assign({}, subconfig)
+  const subconfig = paths.reduce((current, subPath) => current[subPath], config)
+  return deepClone(subconfig)
 }
 
 /**
@@ -54,4 +65,17 @@ function getCustomConfig() {
     console.log('WARINING: using defaults for database connection')
     return {}
   }
+}
+
+/**
+ * Deep clone of an object.
+ * TODO: find better technique than mere serialization/deserialization
+ * @param {Object} obj The object to clone
+ * @returns {Object} The clone of the object
+ */
+function deepClone(obj) {
+  if (obj === undefined || obj === null) {
+    return obj
+  }
+  return JSON.parse(JSON.stringify(obj))
 }
