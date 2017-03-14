@@ -1,3 +1,8 @@
+/**
+ * koa@2 middleware which adds an header 'X-Response-Time' with the duration of
+ * taken by the server to respond in ms.
+ * @returns {Function} koa@2 middleware
+ */
 function responseTime() {
   return function (ctx, next) {
     const start = Date.now()
@@ -8,6 +13,13 @@ function responseTime() {
   }
 }
 
+/**
+ * Middleware who will catch errors and print them nicely
+ * @param {Object} opts Options for the catchErrors middleware
+ * @param {Boolean} opts.toJson Return error as JSON
+ * @param {Boolean} opts.includeStack Include stack trace in error message
+ * @returns {Function} koa@2 middleware
+ */
 function catchErrors(opts) {
   const { toJson, includeStack } = Object.assign({ toJson: false, includeStack: false }, opts)
   return (ctx, next) =>
@@ -32,15 +44,20 @@ function catchErrors(opts) {
   })
 }
 
+/**
+ * koa@2 middleware raising an error if attained
+ * @param {Object} opts Object for all options
+ * @returns {Function} koa@2 middleware
+ */
 function endOfStack(opts) {
   const { status, message } = Object.assign({
     status: 500,
     message: 'You should not be here...'
   }, opts)
-  return function () {
-    const err = new Error(message)
-    err.status = status
-    return Promise.reject(err)
+  return function (ctx) {
+    if (ctx.status === 404) {
+      ctx.throw(status, message)
+    }
   }
 }
 
