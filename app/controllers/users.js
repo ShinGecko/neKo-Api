@@ -14,18 +14,13 @@ module.exports.auth = async function (ctx) {
   if (user[0]) {
     ctx.status = 200
   } else {
-    ctx.set('Content-Type', 'text/plain')
-    ctx.status = 401
-    ctx.body = 'Wrong Login or Password'
+    ctx.throw(401, 'Wrong Login or Password')
   }
-  return true
 }
 
 module.exports.create = async function (ctx) {
   if (!emailEx.test(ctx.request.body.email) || !logEx.test(ctx.request.body.login) || ctx.request.body.password.length < 8) {
-    ctx.set('Content-Type', 'text/plain')
-    ctx.status = 401
-    ctx.body = 'Infos sent didn\'t match requirements'
+    ctx.throw(401, `Infos sent didn't match requirements`)
   } else {
     await models.users.save({
       login: ctx.request.body.login,
@@ -34,5 +29,4 @@ module.exports.create = async function (ctx) {
     })
     ctx.status = 200
   }
-  return true
 }
