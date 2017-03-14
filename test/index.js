@@ -1,11 +1,15 @@
+process.env.NODE_ENV = 'tests'
 /* global describe, it */
-require('../server.js') // eslint-disable-line import/no-unassigned-import, import/no-unresolved
 const chai = require('chai')// eslint-disable-line no-unused-vars
 const supertest = require('supertest')
+const server = require('../app/server')
+const config = require('../app/utils/config')
 
 // launching the server
-process.env.NODE_ENV = 'test'
-const request = supertest('http://localhost:8085')
+
+server.start(1337)
+
+const request = supertest(`http://localhost:${config.get('general.port')}`)
 
 // packages used to run tests
 // const expect = chai.expect
@@ -20,8 +24,8 @@ const wrongEmail = 'test'
 const wrongPassword = 'test1'
 // Paths
 const testPath = '/test'
-const signUpPath = '/user'
-const signInPath = '/user/auth'
+const signUpPath = '/users'
+const signInPath = '/users/auth'
 // Types
 const typeJson = 'json'
 // const typeText = 'text/plain'
