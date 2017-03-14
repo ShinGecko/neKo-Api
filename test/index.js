@@ -1,18 +1,9 @@
 process.env.NODE_ENV = 'tests'
-/* global describe, it */
-const chai = require('chai')// eslint-disable-line no-unused-vars
+// const chai = require('chai') // seems to be unused at all
 const supertest = require('supertest')
 const server = require('../app/server')
-const config = require('../app/utils/config')
 
-// launching the server
-
-server.start(1337)
-
-const request = supertest(`http://localhost:${config.get('general.port')}`)
-
-// packages used to run tests
-// const expect = chai.expect
+const request = supertest(server.app.listen())
 
 // const needed to run tests
 // Login infos

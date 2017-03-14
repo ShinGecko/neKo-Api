@@ -47,6 +47,12 @@
     "semicolon": false,
     "space": true,
     "parser": "babel-eslint",
+    "overrides": [
+      {
+        "files": "test/**/*.js",
+        "globals": ["describe", "it"]
+      }
+    ],
     "rules": {
       "no-var": "error",
       "prefer-const": "error",
