@@ -12,14 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shenrak/neKo.git"
+    "url": "git+https://github.com/ShinGecko/neKo-Api"
   },
-  "author": "Giom, Veuch",
+  "author": "Guillaume Rousseau <roxons333@hotmail.fr>",
+  "contributors": [
+    "Guillaume Rousseau <roxons333@hotmail.fr>",
+    "Justin Rerolle <justin.rerolle@protonmail.com>"
+  ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Shenrak/neKo/issues"
+    "url": "https://github.com/ShinGecko/neKo-Api/issues"
   },
-  "homepage": "https://github.com/Shenrak/neKo#readme",
+  "homepage": "https://github.com/ShinGecko/neKo-Api/#readme",
+  "engine": {
+    "node": ">=7.6"
+  },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "chai": "^3.5.0",
