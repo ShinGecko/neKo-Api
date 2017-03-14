@@ -1,13 +1,15 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
-const routes = require('./app/routes')
-const { utils, logger } = require('./app/middlewares')
-const config = require('./app/utils/config')
+const routes = require('./routes')
+const { utils, logger } = require('./middlewares')
+const config = require('./utils/config')
 
 const app = new Koa()
 
 app.use(logger())
+app.use(utils.responseTime())
+app.use(utils.catchErrors({ toJson: true }))
 app.use(cors({
   origin: function (ctx) {
     if (ctx.url === '/test') {
@@ -21,8 +23,6 @@ app.use(cors({
   allowMethods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }))
-app.use(utils.responseTime())
-app.use(utils.catchErrors({ toJson: true }))
 
 app.use(bodyParser())
 
@@ -36,9 +36,11 @@ for (const method of routes.methods) {
 
 app.use(utils.endOfStack())
 
-const port = process.env.PORT || config.get('global.port')
-config.set('global.port', port)
-
-module.exports = app.listen(port, function () {
-  console.log('Server listening on port 8085')
-})
+module.exports = {
+  app,
+  start(port = config.get('general.port')) {
+    config.set('general.port', port)
+    console.log(config.get('.'))
+    return app.listen(port, () => console.log(`Server listening on port ${config.get('general.port')}`))
+  }
+}

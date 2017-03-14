@@ -2,7 +2,7 @@
   "name": "neko",
   "version": "0.0.0",
   "description": "neKo-Api is the back-end of neKo, an innovative chat created by two students from France. It has been designed to offer several brand new user-friendly features.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "dev": "NODE_ENV=development nodemon -V server.js",
