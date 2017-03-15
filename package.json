@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "NODE_ENV=development nodemon -V server.js",
+    "dev": "NODE_ENV=development nodemon -V index.js",
     "test": "xo && mocha",
     "prepush": " npm run lint --silent",
     "lint": "xo"
