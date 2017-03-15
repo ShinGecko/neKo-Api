@@ -1,118 +1,69 @@
-process.env.NODE_ENV = 'tests'
-// const chai = require('chai') // seems to be unused at all
-const supertest = require('supertest')
-const server = require('../app/server')
+import test from 'ava'
+import request from 'supertest'
 
-const request = supertest(server.app.listen())
+import server from '../app/server'
 
-// const needed to run tests
-// Login infos
-const correctLogin = 'test'
-const correctEmail = 'test@test.test'
-const correctPassword = 'test123'
-const wrongLogin = 't'
-const wrongEmail = 'test'
-const wrongPassword = 'test1'
-// Paths
-const testPath = '/test'
-const signUpPath = '/users'
-const signInPath = '/users/auth'
-// Types
-const typeJson = 'json'
-// const typeText = 'text/plain'
+const appInstance = () => server({ env: 'test' }).listen()
 
-describe('Tests backend API', function () {
-  describe('Testing server responses', function () {
-    it('Should return 200 when GET on /test', function (done) {
-      request
-      .get(testPath)
-      .expect(200)
-      .end(done)
-    })
-  })
-  describe('Test Sign-Up', function () {
-    it('returns 201 and ID when correct Login, Email and Password are sent', function (done) {
-      request
-      .post(signUpPath)
-      .type(typeJson)
-      .send({
-        login: correctLogin,
-        email: correctEmail,
-        password: correctPassword
-      })
-      .expect(201)
-      .end(done)
-    })
-  })
-  it('returns 401 when wrong Login is sent', function (done) {
-    request
-    .post(signUpPath)
-    .type(typeJson)
-    .send({
-      login: wrongLogin,
-      email: correctEmail,
-      password: correctPassword
-    })
-    .expect(401)
-    .end(done)
-  })
-  it('returns 401 when wrong Email is sent', function (done) {
-    request
-    .post(signUpPath)
-    .type(typeJson)
-    .send({
-      login: correctLogin,
-      email: wrongEmail,
-      password: correctPassword
-    })
-    .expect(401)
-    .end(done)
-  })
-  it('returns 401 when wrong Password is sent', function (done) {
-    request
-    .post(signUpPath)
-    .type(typeJson)
-    .send({
-      login: correctLogin,
-      email: correctEmail,
-      password: wrongPassword
-    })
-    .expect(401)
-    .end(done)
-  })
+const defaultApp = appInstance()
+
+const correct = {
+  login: 'test',
+  email: 'test@example.com',
+  password: 'test1234',
+}
+
+const wrong = {
+  login: 'nopenope',
+  email: 'nope@email.hey',
+  password: 'thefuck_man',
+}
+
+const invalid = { // eslint-disable-line no-unused-vars
+  login: '',
+  email: 'foo.bar',
+  password: '5chars',
+}
+
+const paths = {
+  test: '/test',
+  signUp: '/users',
+  signIn: '/users/auth',
+}
+const jsonType = 'json'
+
+const testSignIn = async (t, login, password, status) => {
+  const res = await request(defaultApp)
+        .post(paths.signIn)
+        .type(jsonType)
+        .send({
+          login,
+          password,
+        })
+
+  t.is(res.status, status)
+}
+
+test('Basic connection', async t => {
+  const res = await request(defaultApp).get(paths.test).send()
+
+  t.is(res.status, 200)
 })
-describe('Test Sign-In', function () {
-  it('returns 200 when correct Login and Password are sent', function (done) {
-    request
-    .post(signInPath)
-    .type(typeJson)
-    .send({
-      login: correctLogin,
-      password: correctPassword
-    })
-    .expect(200)
-    .end(done)
-  })
-  it('returns 401 when wrong Login is sent', function (done) {
-    request
-    .post(signInPath)
-    .type(typeJson)
-    .send({
-      login: wrongLogin,
-      password: correctPassword
-    })
-    .expect(401)
-    .end(done)
-  })
-  it('returns 401 when wrong Password is sent', function (done) {
-    request
-    .post(signInPath)
-    .type(typeJson)
-    .send({
-      login: correctLogin,
-      password: wrongPassword
-    })
-    .expect(401)
-    .end(done)
-  })
-})
+
+test('auth:wrong:login',
+  testSignIn,
+  wrong.login,
+  correct.password,
+  401)
+
+test('auth:invalid:password',
+  testSignIn,
+  correct.login,
+  wrong.password,
+  401)
+
+test('auth:correct',
+  testSignIn,
+  correct.login,
+  correct.password,
+  200)
