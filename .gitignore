@@ -1,3 +1,9 @@
+# -- Application specific --
+
+config.js # Never push this. It may contain sensitive information.
+
+# -- Dependencies specific --
+
 # Logs
 logs
 *.log
@@ -37,3 +43,6 @@ neKoApi/jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# MacOS specific
+.DS_Store

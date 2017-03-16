@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "NODE_ENV=development nodemon -V index.js",
-    "test": "xo && mocha",
+    "test": "xo && NODE_ENV=test ava",
+    "test-dev": "NODE_ENV=test ava --watch",
     "prepush": " npm run lint --silent",
     "lint": "xo"
   },
@@ -28,6 +29,7 @@
     "node": ">=7.6"
   },
   "devDependencies": {
+    "ava": "^0.18.2",
     "babel-eslint": "^7.1.1",
     "chai": "^3.5.0",
     "husky": "^0.13.1",
@@ -50,7 +52,10 @@
     "overrides": [
       {
         "files": "test/**/*.js",
-        "globals": ["describe", "it"]
+        "globals": [
+          "describe",
+          "it"
+        ]
       }
     ],
     "rules": {
@@ -66,5 +71,10 @@
       ],
       "no-negated-condition": "off"
     }
+  },
+  "ava": {
+    "files": [
+      "test/*.test.js"
+    ]
   }
 }

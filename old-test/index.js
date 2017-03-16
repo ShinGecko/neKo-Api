@@ -1,3 +1,4 @@
+/* globals describe, it */
 process.env.NODE_ENV = 'tests'
 // const chai = require('chai') // seems to be unused at all
 const supertest = require('supertest')

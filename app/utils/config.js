@@ -8,7 +8,7 @@ const config = {
     default: {
       db: 'neko_api'
     },
-    tests: {
+    test: {
       db: 'neko_tests'
     }
   },
@@ -62,7 +62,9 @@ function getCustomConfig() {
   try {
     return require('../../config.js') // eslint-disable-line import/no-unresolved
   } catch (err) {
-    console.log('WARINING: using defaults for database connection')
+    if (process.env.NODE_ENV !== 'test') {
+      console.log('WARINING: using defaults for database connection')
+    }
     return {}
   }
 }
