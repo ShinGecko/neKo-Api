@@ -1,23 +1,17 @@
 const models = require('./../models')
+const requests = require('./../models/requests')
 
 const logEx = /^[\w-]{3,24}$/
 const emailEx = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
 
-const auth = (login, password) => {
-  if (login.search('@') === -1) {
-    return models.users.filter({
-      login: login,
-      password: password,
-    }).run()
-  }
-  return models.users.filter({
-    email: login,
-    password: password,
-  }).run()
-}
-
 module.exports.auth = async function (ctx) {
-  const user = await auth(ctx.request.body.login, ctx.request.body.password)
+  let type
+  if (ctx.request.body.login.search('@') === -1) {
+    type = 'login'
+  } else {
+    type = 'email'
+  }
+  const user = await requests.reqDoubleArg(models.users, type, ctx.request.body.login, 'password', ctx.request.body.password)
   if (user[0]) {
     ctx.status = 200
   } else {
