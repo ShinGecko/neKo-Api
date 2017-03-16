@@ -1,7 +1,7 @@
 const models = require('./../models')
 
-const logEx = new RegExp('^[a-zA-Z]{3,12}$')
-const emailEx = new RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$')
+const logEx = /^[\w-]{3,24}$/
+const emailEx = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
 
 const auth = (login, password) => {
   if (login.search('@') === -1) {
