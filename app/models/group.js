@@ -10,4 +10,6 @@ const Group = thinky.createModel('Group', {
   metadata: type.object().optional(),
 })
 
+// TODO: many to many group - user
+
 module.exports = Group

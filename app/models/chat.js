@@ -10,7 +10,7 @@ const nameRegex = /^[\w-]+$/
 const types = {
   group: 'group',
   private: 'private',
-  general: 'general',
+  general: 'general', // TODO: general => public?
 }
 
 const validateChatType = () => {
@@ -37,6 +37,8 @@ const Chat = thinky.createModel('Chat', {
     idGroup: type.string().optional(),
   })
 })
+
+// TODO: many to many general chat to users
 
 Chat.belongsTo(User, 'user', 'idUser1', 'id')
 Chat.belongsTo(User, 'user', 'idUser2', 'id')
