@@ -15,15 +15,15 @@ const Users = thinky.createModel('User', {
 })
 
 Users.pre('save', async function (next) {
-  let res = await requests.reqSingleArg(Users, 'email', this.email)
-  if (res[0]) {
+  const email = await requests.reqSingleArg(Users, 'email', this.email)
+  const login = await requests.reqSingleArg(Users, 'login', this.login)
+  if (email[0]) {
     next(new Error('Email already taken'))
-  }
-  res = await requests.reqSingleArg(Users, 'login', this.login)
-  if (res[0]) {
+  } else if (login[0]) {
     next(new Error('Login already taken'))
+  } else {
+    next()
   }
-  next()
 })
 
 Users.post('save', function (next) {
