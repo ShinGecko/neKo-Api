@@ -1,4 +1,5 @@
 const thinky = require('./../utils/thinky')
+const User = require('./users')
 
 const type = thinky.type
 // const r = thinky.r
@@ -10,6 +11,6 @@ const Group = thinky.createModel('Group', {
   metadata: type.object().optional(),
 })
 
-// TODO: many to many group - user
+Group.hasAndBelongsToMany(User, 'users', 'id', 'id')
 
 module.exports = Group
