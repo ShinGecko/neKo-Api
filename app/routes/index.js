@@ -1,6 +1,6 @@
 const files = [
   'test',
-  // 'chat',
+  'chat',
   'users',
 ]
 

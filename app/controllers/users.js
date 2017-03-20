@@ -1,4 +1,4 @@
-const models = require('./../models')
+const model = require('./../models/users')
 const requests = require('./../models/requests')
 
 const logEx = /^[\w-]{3,24}$/
@@ -11,7 +11,7 @@ module.exports.auth = async function (ctx) {
   } else {
     type = 'email'
   }
-  const user = await requests.reqDoubleArg(models.users, type, ctx.request.body.login, 'password', ctx.request.body.password)
+  const user = await requests.reqDoubleArg(model.users, type, ctx.request.body.login, 'password', ctx.request.body.password)
   if (user[0]) {
     ctx.status = 200
   } else {
@@ -23,7 +23,7 @@ module.exports.create = async function (ctx) {
   if (!emailEx.test(ctx.request.body.email) || !logEx.test(ctx.request.body.login) || ctx.request.body.password.length < 7) {
     ctx.throw(401, `Infos sent didn't match requirements`)
   } else {
-    await models.users.save({
+    await model.users.save({
       login: ctx.request.body.login,
       password: ctx.request.body.password,
       email: ctx.request.body.email,

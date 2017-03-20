@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const controllers = require('./../controllers')
+const controller = require('./../controllers/users')
 
 const router = new Router({
   prefix: '/users'
@@ -10,13 +10,13 @@ router.get('/', async function (ctx) {
 })
 
 router.post('/create', async function (ctx, next) {
-  if (!await controllers.users.create(ctx)) {
+  if (!await controller.create(ctx)) {
     await next()
   }
 })
 
 router.post('/auth', async function (ctx, next) {
-  if (!await controllers.users.auth(ctx)) {
+  if (!await controller.auth(ctx)) {
     await next()
   }
 }) // Define routes
