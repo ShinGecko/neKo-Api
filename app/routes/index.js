@@ -1,7 +1,8 @@
 const files = [
   'test',
-  'chat',
+  'chats',
   'users',
+  'groups'
 ]
 
 const routes = files
