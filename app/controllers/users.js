@@ -2,7 +2,7 @@ const models = require('./../models')
 const requests = require('./../models/requests')
 
 const logEx = /^[\w-]{3,24}$/
-const emailEx = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
+const emailEx = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})+$/
 
 module.exports.auth = async function (ctx) {
   let type
