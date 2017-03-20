@@ -1,0 +1,17 @@
+= neko api =
+
+== db scheme ==
+- [x] User
+- [ ] Chat
+  - [ ] custom getters/setters for different chats
+- [ ] Group
+  - [ ] Do the n/n on both sides?
+- [ ] Message
+- [ ] Role/Action
+  - [ ] Rethink the position of a Role
+
+== routes ==
+- [ ] users: list, sign up...
+- [ ] chats: list, filter by user, messages...
+- [ ] groups: list, filter...
+- [ ] self: customisation...
