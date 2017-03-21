@@ -1,4 +1,4 @@
-const model = require('./../models/users')
+const model = require('./../models/user')
 const requests = require('./../models/requests')
 
 const logEx = /^[\w-]{3,24}$/

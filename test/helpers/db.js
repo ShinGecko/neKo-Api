@@ -1,4 +1,4 @@
-import Users from '../../app/models/users'
+import Users from '../../app/models/user'
 
 export const credentials = {
   correct: {

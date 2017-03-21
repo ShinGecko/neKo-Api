@@ -1,5 +1,5 @@
 const thinky = require('./../utils/thinky')
-const User = require('./users')
+const User = require('./user')
 const Group = require('./group')
 
 const type = thinky.type
