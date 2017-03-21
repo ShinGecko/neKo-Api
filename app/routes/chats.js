@@ -6,11 +6,13 @@ const router = new Router({
   prefix: '/chats'
 })
 
-router.get('/:id/messages', async function (ctx) {
+router.get('/:id/messages', async function (ctx, next) {
+  await next()
   // TODO: stuff
 })
 
-router.get('/:id/leader', async function (ctx) {
+router.get('/:id/leader', async function (ctx, next) {
+  await next()
   // TODO: stuff
 })
 

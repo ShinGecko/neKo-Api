@@ -21,6 +21,12 @@ router.post('/auth', async function (ctx, next) {
   }
 }) // Define routes
 
+router.get('/:id/groups', async function (ctx, next) {
+  if (!await controller.groups(ctx)) {
+    await next()
+  }
+})
+
 module.exports = {
   routes: router.routes(),
   methods: router.allowedMethods()
