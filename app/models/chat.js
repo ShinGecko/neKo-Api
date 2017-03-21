@@ -37,6 +37,7 @@ const Chat = thinky.createModel('Chat', {
 })
 
 Chat.hasAndBelongsToMany(User, 'users', 'id', 'id') // for group and public chat
+User.hasAndBelongsToMany(Group, 'groups', 'id', 'id')
 
 Chat.belongsTo(User, 'user', 'private.idUser1', 'id')
 Chat.belongsTo(User, 'user', 'private.idUser2', 'id')

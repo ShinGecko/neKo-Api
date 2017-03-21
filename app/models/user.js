@@ -1,6 +1,5 @@
 const thinky = require('./../utils/thinky')
 const requests = require('./requests')
-const Group = require('./group')
 
 const type = thinky.type
 const r = thinky.r
@@ -34,7 +33,5 @@ Users.post('save', function (next) {
   next()
 })
 
-Users.hasAndBelongsToMany(Group, 'groups', 'id', 'id')
 /* eslint-enable camelcase */
-
 module.exports = Users
