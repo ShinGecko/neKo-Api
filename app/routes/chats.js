@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 const Router = require('koa-router')
-const controller = require('./../controllers/chat')
+const controller = require('./../controllers/chats')
 
 const router = new Router({
-  prefix: '/chat'
+  prefix: '/chats'
 })
 
 router.get('/:id/messages', async function (ctx) {
