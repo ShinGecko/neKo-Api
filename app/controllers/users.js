@@ -14,9 +14,9 @@ module.exports.auth = async function (ctx) {
   const user = await requests.reqDoubleArg(model, type, ctx.request.body.login, 'password', ctx.request.body.password)
   if (user[0]) {
     ctx.status = 200
-  } else {
-    ctx.throw(401, 'Wrong Login or Password')
+    return user[0]
   }
+  ctx.throw(401, 'Wrong Login or Password')
 }
 
 module.exports.create = async function (ctx) {

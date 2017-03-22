@@ -1,4 +1,5 @@
 const Router = require('koa-router')
+const jwt = require('jsonwebtoken')
 const controller = require('./../controllers/users')
 
 const router = new Router({
@@ -9,22 +10,24 @@ router.get('/', async function (ctx) {
   ctx.response.status = 200
 })
 
-router.post('/create', async function (ctx, next) {
-  if (!await controller.create(ctx)) {
-    await next()
+router.post('/create', async function (ctx) {
+  await controller.create(ctx)
+})
+router.post('/auth', async function (ctx) {
+  const user = await controller.auth(ctx)
+  ctx.body = {
+    token: jwt.sign({
+      profile: {
+        id: user.id
+      }
+    },
+    'secret',
+    { expiresIn: 300 })
   }
 })
 
-router.post('/auth', async function (ctx, next) {
-  if (!await controller.auth(ctx)) {
-    await next()
-  }
-}) // Define routes
-
-router.get('/:id/groups', async function (ctx, next) {
-  if (!await controller.groups(ctx)) {
-    await next()
-  }
+router.get('/groups', async function (ctx) {
+  await controller.groups(ctx)
 })
 
 module.exports = {
