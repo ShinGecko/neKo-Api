@@ -39,6 +39,7 @@
     "xo": "^0.17.1"
   },
   "dependencies": {
+    "jsonwebtoken": "^7.3.0",
     "koa": "^2.0.1",
     "koa-bodyparser": "^4.1.0",
     "koa-router": "^7.1.0",
