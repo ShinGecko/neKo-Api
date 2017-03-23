@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const secret = '1371783'
+const expirationTime = 3600 // time in seconds
 
 async function createToken(id) {
   return {
@@ -10,7 +11,7 @@ async function createToken(id) {
       }
     },
     secret,
-    { expiresIn: 300 })
+    { expiresIn: expirationTime })
   }
 }
 
@@ -21,7 +22,6 @@ function checkToken() {
       token = jwt.verify(ctx.header.authorization, secret)
     }
     ctx.state.user = token.profile
-    console.log(token)
     return next()
   }
 }
