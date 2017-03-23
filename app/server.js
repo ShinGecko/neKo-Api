@@ -2,7 +2,7 @@ const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 const routes = require('./routes')
-const { utils, logger } = require('./middlewares')
+const { utils, logger, jwt } = require('./middlewares')
 const config = require('./utils/config')
 
 const envs = {
@@ -38,7 +38,7 @@ function createServer(opts) {
     allowMethods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
   }))
-
+  app.use(jwt.checkToken())
   app.use(bodyParser())
 
   for (const route of routes.routes) {
