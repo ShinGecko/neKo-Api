@@ -32,8 +32,7 @@ module.exports.create = async function (ctx) {
   }
 }
 
-/* eslint-disable no-unused-vars */
 module.exports.getGroups = async function (ctx) {
-  console.log(ctx.state.user)
-  // requests.reqFreeArg()
+  const user = await requests.reqSingleArg(model, 'id', ctx.state.user.id)
+  ctx.body = user.groups
 }
