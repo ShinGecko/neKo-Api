@@ -3,11 +3,13 @@ const jwt = require('jsonwebtoken')
 const secret = '1371783'
 const expirationTime = 3600 // time in seconds
 
-async function createToken(id) {
+async function createToken(user) {
   return {
     token: jwt.sign({
       profile: {
-        id: id
+        email: user.email,
+        login: user.login,
+        id: user.id
       }
     },
     secret,

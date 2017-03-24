@@ -15,7 +15,7 @@ router.post('/create', async function (ctx) {
 })
 router.post('/auth', async function (ctx) {
   const user = await controller.auth(ctx)
-  ctx.body = await jwt.createToken(user.id)
+  ctx.body = await jwt.createToken(user)
 })
 
 router.get('/groups', async function (ctx) {
