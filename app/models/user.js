@@ -1,10 +1,8 @@
 const thinky = require('./../utils/thinky')
-const requests = require('./requests')
 
 const type = thinky.type
 const r = thinky.r
 
-/* eslint-disable camelcase */
 const Users = thinky.createModel('User', {
   id: type.string().default(r.uuid()),
   login: type.string(),
@@ -15,8 +13,8 @@ const Users = thinky.createModel('User', {
 })
 
 Users.pre('save', async function (next) {
-  const email = await requests.reqSingleArg(Users, 'email', this.email)
-  const login = await requests.reqSingleArg(Users, 'login', this.login)
+  const email = await Users.filter(r.row('email').eq(this.email)).run()
+  const login = await Users.filter(r.row('login').eq(this.login)).run()
   if (email[0]) {
     next(new Error('Email already taken'))
   } else if (login[0]) {
@@ -33,5 +31,4 @@ Users.post('save', function (next) {
   next()
 })
 
-/* eslint-enable camelcase */
 module.exports = Users

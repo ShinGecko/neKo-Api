@@ -1,6 +1,4 @@
 const thinky = require('./../utils/thinky')
-const User = require('./user')
-const Group = require('./group')
 
 const type = thinky.type
 // const r = thinky.r
@@ -35,13 +33,6 @@ const Chat = thinky.createModel('Chat', {
   idUser2: type.string().optional(), // for private chat
   idGroup: type.string().optional(), // for group chat
 })
-
-Chat.hasAndBelongsToMany(User, 'users', 'id', 'id') // for group and public chat
-User.hasAndBelongsToMany(Group, 'groups', 'id', 'id')
-
-Chat.belongsTo(User, 'user', 'private.idUser1', 'id')
-Chat.belongsTo(User, 'user', 'private.idUser2', 'id')
-Chat.belongsTo(Group, 'group', 'idGroup', 'id')
 
 Chat.pre('save', validateChatType)
 Chat.pre('validate', validateChatType)
