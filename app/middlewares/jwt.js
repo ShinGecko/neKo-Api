@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const secret = '1371783'
-const expirationTime = 3600 // time in seconds
+const expirationTime = 1000000000 // time in seconds
 
 async function createToken(user) {
   return {
@@ -20,7 +20,7 @@ async function createToken(user) {
 function checkToken() {
   return function (ctx, next) {
     let token = {}
-    if (ctx.path !== '/users/auth') {
+    if (ctx.path !== '/users/auth' && ctx.path !== '/users/create') {
       token = jwt.verify(ctx.header.authorization, secret)
     }
     ctx.state.user = token.profile
